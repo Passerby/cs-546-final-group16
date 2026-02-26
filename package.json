@@ -11,6 +11,8 @@
   "author": "Group 16",
   "license": "ISC",
   "dependencies": {
+    "express": "^5.2.1",
+    "express-handlebars": "^8.0.6",
     "mongodb": "^6.1.0"
   }
 }
