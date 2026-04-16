@@ -1,7 +1,7 @@
 {
-  "name": "cs-546-lab4",
+  "name": "cs-546-final-group16",
   "version": "1.0.0",
-  "description": "",
+  "description": "neighborhood issue tracker",
   "main": "app.js",
   "type": "module",
   "scripts": {
@@ -11,8 +11,12 @@
   "author": "Group 16",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "express": "^5.2.1",
     "express-handlebars": "^8.0.6",
-    "mongodb": "^6.1.0"
+    "express-session": "^1.19.0",
+    "mongodb": "^6.1.0",
+    "uuid": "^14.0.0",
+    "xss": "^1.0.15"
   }
 }
