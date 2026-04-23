@@ -1,0 +1,14 @@
+<h1>create account</h1>
+{{#if error}}<p class="err">{{error}}</p>{{/if}}
+<form method="post" action="/signup">
+  <label>first name</label>
+  <input name="firstName" value="{{firstName}}" required>
+  <label>last name</label>
+  <input name="lastName" value="{{lastName}}" required>
+  <label>email</label>
+  <input name="email" type="email" value="{{email}}" required>
+  <label>password (min 6)</label>
+  <input name="password" type="password" required>
+  <button type="submit">sign up</button>
+</form>
+<p>already have an account? <a href="/login">login</a></p>
