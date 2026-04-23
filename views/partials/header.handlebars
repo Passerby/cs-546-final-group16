@@ -1,0 +1,19 @@
+<header class="topbar">
+  <div class="container">
+    <a href="/" class="brand">Issue Tracker</a>
+    <nav>
+      {{#if currentUser}}
+        <span>hi, {{currentUser.firstName}}</span>
+        <a href="/issues/new">+ report</a>
+        <a href="/trending">trending</a>
+        {{#if (eq currentUser.role 'admin')}}
+          <a href="/admin/moderation">admin</a>
+        {{/if}}
+        <a href="/logout">logout</a>
+      {{else}}
+        <a href="/login">login</a>
+        <a href="/signup">sign up</a>
+      {{/if}}
+    </nav>
+  </div>
+</header>
