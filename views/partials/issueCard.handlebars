@@ -1,0 +1,12 @@
+<div class="issue-card">
+  <h3><a href="/issues/{{_id}}">{{title}}</a></h3>
+  <div class="meta">
+    <span class="tag src-{{source}}">{{source}}</span>
+    <span class="tag status-{{status}}">{{status}}</span>
+    <span class="tag">{{category}}</span>
+    {{#if location.address}}<span> · {{location.address}}</span>{{/if}}
+    <span> · {{formatDate createdAt}}</span>
+    <span> · {{upvotes}} upvotes</span>
+  </div>
+  <p>{{short description 160}}</p>
+</div>

@@ -1,0 +1,65 @@
+<h1>{{issue.title}}</h1>
+<div class="meta">
+  <span class="tag src-{{issue.source}}">{{issue.source}}</span>
+  <span class="tag status-{{issue.status}}">{{issue.status}}</span>
+  <span class="tag">{{issue.category}}</span>
+</div>
+
+<p><b>location:</b> {{issue.location.address}}{{#if issue.location.lat}} ({{issue.location.lat}}, {{issue.location.lng}}){{/if}}</p>
+<p><b>posted:</b> {{formatDate issue.createdAt}} &middot; {{issue.upvotes}} upvotes</p>
+
+<div class="actions">
+  <form method="post" action="/issues/{{issue._id}}/upvote">
+    <button class="upvote-btn" type="submit">+1 upvote ({{issue.upvotes}})</button>
+  </form>
+
+  {{#if currentUser}}
+    {{#if following}}
+      <form method="post" action="/issues/{{issue._id}}/unfollow">
+        <button class="followBtn" type="submit">unfollow</button>
+      </form>
+    {{else}}
+      <form method="post" action="/issues/{{issue._id}}/follow">
+        <button class="followBtn" type="submit">follow</button>
+      </form>
+    {{/if}}
+
+    {{#if (eq issue.createdBy currentUser._id)}}
+      <a href="/issues/{{issue._id}}/edit">edit</a>
+      <form method="post" action="/issues/{{issue._id}}/delete" onsubmit="return confirm('delete this issue?')">
+        <button type="submit">delete</button>
+      </form>
+    {{/if}}
+    {{#if (eq currentUser.role 'admin')}}
+      {{#unless (eq issue.createdBy currentUser._id)}}
+        <a href="/issues/{{issue._id}}/edit">edit (admin)</a>
+        <form method="post" action="/issues/{{issue._id}}/delete" onsubmit="return confirm('delete this issue (admin)?')">
+          <button type="submit">delete (admin)</button>
+        </form>
+      {{/unless}}
+    {{/if}}
+  {{/if}}
+</div>
+
+<h3>description</h3>
+<p>{{issue.description}}</p>
+
+<h3>comments ({{comments.length}})</h3>
+{{#each comments}}
+  <div class="comment">
+    <div class="meta">{{authorName}} &middot; {{formatDate createdAt}}</div>
+    <p>{{message}}</p>
+  </div>
+{{else}}
+  <p>no comments yet.</p>
+{{/each}}
+
+{{#if currentUser}}
+<form method="post" action="/issues/{{issue._id}}/comments" style="margin-top:12px">
+  <label>add a comment</label>
+  <textarea name="message" required></textarea>
+  <button type="submit">post comment</button>
+</form>
+{{else}}
+  <p><a href="/login">login</a> to comment.</p>
+{{/if}}

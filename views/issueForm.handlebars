@@ -1,0 +1,40 @@
+<h1>{{#if edit}}edit issue{{else}}report a new issue{{/if}}</h1>
+{{#if error}}<p class="err">{{error}}</p>{{/if}}
+
+<form method="post" action="{{#if edit}}/issues/{{issue._id}}/edit{{else}}/issues/new{{/if}}">
+  <label>title</label>
+  <input name="title" required value="{{#if edit}}{{issue.title}}{{else}}{{title_v}}{{/if}}">
+
+  <label>description</label>
+  <textarea name="description" required>{{#if edit}}{{issue.description}}{{else}}{{description}}{{/if}}</textarea>
+
+  <label>category</label>
+  <select name="category" required>
+    {{#each categories}}
+      <option value="{{this}}"
+        {{#if ../edit}}{{#if (eq this ../issue.category)}}selected{{/if}}{{/if}}
+        {{#unless ../edit}}{{#if (eq this ../category)}}selected{{/if}}{{/unless}}
+      >{{this}}</option>
+    {{/each}}
+  </select>
+
+  <label>address</label>
+  <input name="address" value="{{#if edit}}{{issue.location.address}}{{else}}{{address}}{{/if}}">
+
+  <label>latitude (optional)</label>
+  <input name="lat" type="number" step="any" value="{{#if edit}}{{issue.location.lat}}{{else}}{{lat}}{{/if}}">
+
+  <label>longitude (optional)</label>
+  <input name="lng" type="number" step="any" value="{{#if edit}}{{issue.location.lng}}{{else}}{{lng}}{{/if}}">
+
+  {{#if edit}}
+  <label>status</label>
+  <select name="status">
+    <option value="open" {{#if (eq issue.status 'open')}}selected{{/if}}>open</option>
+    <option value="in_progress" {{#if (eq issue.status 'in_progress')}}selected{{/if}}>in_progress</option>
+    <option value="resolved" {{#if (eq issue.status 'resolved')}}selected{{/if}}>resolved</option>
+  </select>
+  {{/if}}
+
+  <button type="submit">{{#if edit}}save{{else}}submit{{/if}}</button>
+</form>

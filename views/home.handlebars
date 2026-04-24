@@ -1,0 +1,37 @@
+<h1>dashboard</h1>
+
+<form class="filter-bar" method="get" action="/">
+  <input name="q" value="{{q}}" placeholder="search title">
+  <select name="category">
+    <option value="all">all categories</option>
+    {{#each categories}}
+      <option value="{{this}}" {{#if (eq this ../category)}}selected{{/if}}>{{this}}</option>
+    {{/each}}
+  </select>
+  <select name="status">
+    <option value="all">any status</option>
+    <option value="open" {{#if (eq status 'open')}}selected{{/if}}>open</option>
+    <option value="in_progress" {{#if (eq status 'in_progress')}}selected{{/if}}>in_progress</option>
+    <option value="resolved" {{#if (eq status 'resolved')}}selected{{/if}}>resolved</option>
+  </select>
+  <select name="source">
+    <option value="all">any source</option>
+    <option value="official" {{#if (eq source 'official')}}selected{{/if}}>official</option>
+    <option value="community" {{#if (eq source 'community')}}selected{{/if}}>community</option>
+  </select>
+  <select name="sort">
+    <option value="date" {{#if (eq sort 'date')}}selected{{/if}}>newest</option>
+    <option value="upvotes" {{#if (eq sort 'upvotes')}}selected{{/if}}>most upvotes</option>
+    <option value="category" {{#if (eq sort 'category')}}selected{{/if}}>by category</option>
+    <option value="status" {{#if (eq sort 'status')}}selected{{/if}}>by status</option>
+  </select>
+  <button type="submit">apply</button>
+</form>
+
+{{#if items.length}}
+  {{#each items}}
+    {{> issueCard}}
+  {{/each}}
+{{else}}
+  <p>no issues match your filter.</p>
+{{/if}}
