@@ -1,0 +1,8 @@
+<h1>trending</h1>
+<p>top {{items.length}} most upvoted (approved only)</p>
+
+{{#each items}}
+  {{> issueCard}}
+{{else}}
+  <p>nothing trending yet.</p>
+{{/each}}
