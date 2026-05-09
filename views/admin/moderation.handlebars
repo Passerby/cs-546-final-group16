@@ -1,0 +1,27 @@
+<h1>admin moderation</h1>
+<p>{{pending.length}} pending issue(s)</p>
+
+{{#each pending}}
+  <div class="issue-card">
+    <h3><a href="/issues/{{_id}}">{{title}}</a></h3>
+    <div class="meta">
+      <span class="tag src-{{source}}">{{source}}</span>
+      <span class="tag">{{category}}</span>
+      <span> &middot; {{formatDate createdAt}}</span>
+    </div>
+    <p>{{short description 200}}</p>
+    <div class="actions">
+      <form method="post" action="/admin/moderation/{{_id}}/approve">
+        <button type="submit">approve</button>
+      </form>
+      <form method="post" action="/admin/moderation/{{_id}}/reject">
+        <button type="submit">reject</button>
+      </form>
+      <form method="post" action="/admin/moderation/{{_id}}/delete" onsubmit="return confirm('delete?')">
+        <button type="submit">delete</button>
+      </form>
+    </div>
+  </div>
+{{else}}
+  <p>nothing pending right now.</p>
+{{/each}}
