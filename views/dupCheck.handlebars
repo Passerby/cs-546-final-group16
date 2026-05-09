@@ -1,0 +1,28 @@
+<h1>similar issues found nearby</h1>
+<p>looks like someone may have reported this already. you can upvote one of these instead, or create anyway.</p>
+
+{{#each dups}}
+  <div class="issue-card">
+    <h3><a href="/issues/{{_id}}">{{title}}</a></h3>
+    <div class="meta">
+      <span class="tag">{{category}}</span>
+      <span class="tag status-{{status}}">{{status}}</span>
+      <span> &middot; {{upvotes}} upvotes &middot; ~{{distance}} km away</span>
+    </div>
+    <p>{{short description 120}}</p>
+    <form method="post" action="/issues/{{_id}}/upvote">
+      <button class="upvote-btn" type="submit">+1 upvote this one</button>
+    </form>
+  </div>
+{{/each}}
+
+<form method="post" action="/issues/new">
+  <input type="hidden" name="title" value="{{formData.title}}">
+  <input type="hidden" name="description" value="{{formData.description}}">
+  <input type="hidden" name="category" value="{{formData.category}}">
+  <input type="hidden" name="address" value="{{formData.address}}">
+  <input type="hidden" name="lat" value="{{formData.lat}}">
+  <input type="hidden" name="lng" value="{{formData.lng}}">
+  <input type="hidden" name="force" value="1">
+  <button type="submit">create anyway</button>
+</form>
